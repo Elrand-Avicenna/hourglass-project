@@ -125,35 +125,51 @@
       e.preventDefault();
       setTargetFromClientXY(e.clientX, e.clientY, 'touch');
     }
-    function onTouchUp(e) {
-      if (e.pointerId !== touchPointerId) return;
-      try { active.releasePointerCapture(e.pointerId); } catch {}
-      touchDragging = false;
-      touchPointerId = null;
-      document.removeEventListener('pointermove', onTouchMove);
-      document.removeEventListener('pointerup', onTouchUp);
-      document.removeEventListener('pointercancel', onTouchUp);
-      // On laisse l'icône là où elle est (x,y figés par le ressort)
-    }
+function onTouchUp(e) {
+  if (e.pointerId !== touchPointerId) return;
+  try { active.releasePointerCapture(e.pointerId); } catch {}
 
-    // FOLLOW TACTILE GLOBAL (après sélection)
-    function onGlobalTouchStart(e) {
-      if (!active || e.pointerType === 'mouse') return;
-      // Nouveau touch sur l'écran = commencer à suivre
-      touchDragging = true;
-      touchPointerId = e.pointerId;
-      
-      // Calculer offset depuis la position actuelle de l'icône
-      const r = active.getBoundingClientRect();
-      grab.x = e.clientX - r.left;
-      grab.y = e.clientY - r.top;
-      
-      setTargetFromClientXY(e.clientX, e.clientY, 'touch');
-      document.addEventListener('pointermove', onTouchMove, { passive: false });
-      document.addEventListener('pointerup', onTouchUp, { passive: false });
-      document.addEventListener('pointercancel', onTouchUp, { passive: false });
-      e.preventDefault();
-    }
+  // commit position
+  const r = active.getBoundingClientRect();
+  active.style.left = r.left + 'px';
+  active.style.top  = r.top  + 'px';
+  baseLeft = r.left; baseTop = r.top;
+  x = y = vx = vy = tx = ty = 0;
+  active.style.transform = 'translate3d(0,0,0)';
+
+  touchDragging = false;
+  touchPointerId = null;
+  document.removeEventListener('pointermove', onTouchMove);
+  document.removeEventListener('pointerup', onTouchUp);
+  document.removeEventListener('pointercancel', onTouchUp);
+}
+
+
+function onGlobalTouchStart(e) {
+  if (!active || e.pointerType === 'mouse') return;
+
+  touchDragging = true;
+  touchPointerId = e.pointerId;
+
+  // Empêcher toute scroll/zoom gesture dès l’appui
+  try { e.preventDefault(); } catch {}
+
+  // Très important : reprendre la capture sur l’icône active
+  try { active.setPointerCapture(e.pointerId); } catch {}
+
+  // Rebrancher immédiatement les listeners de drag
+  document.addEventListener('pointermove', onTouchMove, { passive: false });
+  document.addEventListener('pointerup', onTouchUp, { passive: false });
+  document.addEventListener('pointercancel', onTouchUp, { passive: false });
+
+  // Recalculer le point de prise (offset doigt -> coin de l’icône)
+  const r = active.getBoundingClientRect();
+  grab.x = e.clientX - r.left;
+  grab.y = e.clientY - r.top;
+
+  setTargetFromClientXY(e.clientX, e.clientY, 'touch');
+}
+
 
     // Sélection d'une icône (souris ou tactile)
     icons.forEach((el) => {
@@ -220,4 +236,5 @@
       }, { passive: false });
     });
   });
+
 })();
