@@ -37,8 +37,8 @@
 
   /* L'écran interne prend 100% sans bordure ni arrondi */
   .screen {
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100% !important;
+    height: 100% !important;
     border-radius: 0 !important;
     border: none !important;
   }
@@ -57,3 +57,4 @@
     display: none !important;
   }
 }
+
