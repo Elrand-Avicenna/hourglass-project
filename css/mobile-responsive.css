@@ -6,8 +6,8 @@
 
   /* Le body ne doit plus afficher le décor */
   body {
-    background: #000;
-    background-image: none;
+    background: #000 !important;       /* fond neutre derrière l'écran */
+    background-image: none !important;  /* supprime l'image décor définie dans main.css */
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -15,42 +15,36 @@
 
   /* On neutralise l'image de la main et les animations associées */
   .hand-mobile {
-    background: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: none;     /* stoppe handLift / handIdle */
-    transform: none;
+    background: none !important;   /* retire ../img/hand-mobile.png */
+    height: 100% !important;
+    width: 100% !important;
+    animation: none !important;     /* stoppe handLift / handIdle */
+    transform: none !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
   }
 
   /* Le smartphone occupe tout l'écran */
   .smartphone {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     overflow: hidden;
-  }
-
-  .access-screen {
-    transition: none;
   }
 
   /* L'écran interne prend 100% sans bordure ni arrondi */
   .screen {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    border: none;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    border: none !important;
   }
 
   /* Le canvas suit en plein écran (il est déjà en position: absolute) */
   #world {
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh !important;
     top: 0;
     left: 0;
   }
@@ -58,11 +52,6 @@
   /* On masque les zones "erase" qui n'ont plus lieu d'être en plein écran */
   .erase,
   .erase2 {
-    display: none ;
+    display: none !important;
   }
 }
-
-
-
-
-
