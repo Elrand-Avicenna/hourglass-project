@@ -27,6 +27,10 @@
     overflow: hidden;
   }
 
+  .hand-mobile.idle {
+    animation: none;
+  }
+
   /* Le smartphone occupe tout l'écran */
   .smartphone {
     position: relative;
@@ -61,6 +65,7 @@
     display: none ;
   }
 }
+
 
 
 
