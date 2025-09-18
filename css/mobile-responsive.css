@@ -8,22 +8,23 @@
   body {
     background: #000;
     background-image: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
   }
 
   /* On neutralise l'image de la main et les animations associées */
   .hand-mobile {
     background: none;
-    height: 100%;
-    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     animation: none;     /* stoppe handLift / handIdle */
     transform: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 
   /* Le smartphone occupe tout l'écran */
@@ -56,4 +57,5 @@
     display: none ;
   }
 }
+
 
