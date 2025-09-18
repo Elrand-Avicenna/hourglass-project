@@ -35,6 +35,10 @@
     overflow: hidden;
   }
 
+  .access-screen {
+    transition: none;
+  }
+
   /* L'écran interne prend 100% sans bordure ni arrondi */
   .screen {
     width: 100%;
@@ -57,5 +61,6 @@
     display: none ;
   }
 }
+
 
 
