@@ -8,8 +8,8 @@
   body {
     background: #000 !important;       /* fond neutre derrière l'écran */
     background-image: none !important;  /* supprime l'image décor définie dans main.css */
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
   }
 
@@ -55,4 +55,5 @@
     display: none !important;
   }
 }
+
 
