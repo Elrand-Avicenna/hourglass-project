@@ -44,12 +44,13 @@
   }
 
   /* Le canvas suit en plein écran (il est déjà en position: absolute) */
-/*  #world {
+   #world {
     width: 100% !important;
     height: 100% !important;
     top: 0;
     left: 0;
-  } */
+    z-index: 999999999999999999;
+  }
 
   /* On masque les zones "erase" qui n'ont plus lieu d'être en plein écran */
   .erase,
@@ -57,6 +58,7 @@
     display: none !important;
   }
 }
+
 
 
 
